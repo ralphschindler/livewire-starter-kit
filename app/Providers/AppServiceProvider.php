@@ -24,17 +24,16 @@ class AppServiceProvider extends ServiceProvider
     {
         config(['livewire.layout' => 'layouts.app']);
 
-        $this->loadViewComponentsAs('layouts', [
-            'guest' => null, // Guest::class,
-            'app' => null, // App::class,
-        ]);
+        // support App\View\Layouts\App as component
+        Blade::componentNamespace('App\View\Layouts', 'layouts');
 
+        // support <x-layouts::*> components
         Blade::anonymousComponentPath(
             resource_path('views/layouts'),
             'layouts'
         );
 
-        // page partials
+        // support <x-pages::*> components
         Blade::anonymousComponentPath(
             resource_path('views/pages'),
             'pages'
