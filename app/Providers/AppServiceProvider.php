@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +20,21 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        config(['livewire.layout' => 'layouts.app']);
+
+        // support App\View\Layouts\App as component
+        Blade::componentNamespace('App\View\Layouts', 'layouts');
+
+        // support <x-layouts::*> components
+        Blade::anonymousComponentPath(
+            resource_path('views/layouts'),
+            'layouts'
+        );
+
+        // support <x-pages::*> components
+        Blade::anonymousComponentPath(
+            resource_path('views/pages'),
+            'pages'
+        );
     }
 }
