@@ -2,8 +2,6 @@
 
 namespace App\Providers;
 
-use App\View\Layouts\App;
-use App\View\Layouts\Guest;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
